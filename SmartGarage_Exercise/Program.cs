@@ -1,4 +1,6 @@
-﻿namespace SmartGarage_Exercise
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace SmartGarage_Exercise
 {
     internal class Program
     {
@@ -16,28 +18,41 @@
 			Car[] carFleet = { car1 };
 			Motorcycle[] bikeFleet = { bike1 };
 			CleaningRobot[] robotFleet = { robot1 };
+            IHorizontalMovable[] movables = { car1, bike1, robot1 };
 
-			// הפעלת הפונקציות הישנות
-			SmartGarageTester.RefuelAllCars(carFleet);
+            // הפעלת הפונקציות הישנות
+            SmartGarageTester.RefuelAllCars(carFleet);
 			SmartGarageTester.ChargeAllRobots(robotFleet);
-			SmartGarageTester.MoveAllRight(carFleet, bikeFleet, robotFleet);
+			SmartGarageTester.MoveAllRight(movables);
 
 			// הפעלת הפעולות הייחודיות - אין ברירה אלא לעשות זאת ידנית
 			car1.Drive();
 			bike1.Drive();
 			robot1.StartCleaning();
 
+            Drone drone1 = new Drone("DJI-Mavic");
+            Vehicle[] allVehicles = { car1, bike1 };
+            SmartGarageTester.TestAllVehicles(allVehicles);
+            SmartGarageTester.ChargeMoving(movables);
+            robot1.StartCleaning();
+            drone1.Fly();
 
-			// -----------------------------------------------------------------
-			// --- המטרה הסופית (הקוד הזה נמצא בהערה כי הוא לא יתקמפל) ---
-			// --- התלמידים צריכים לגרום לקוד הבא לעבוד ---
-			// -----------------------------------------------------------------
 
-			/*
+
+
+
+
+
+
+            // -----------------------------------------------------------------
+            // --- המטרה הסופית (הקוד הזה נמצא בהערה כי הוא לא יתקמפל) ---
+            // --- התלמידים צריכים לגרום לקוד הבא לעבוד ---
+            // -----------------------------------------------------------------
+
+            /*
             Console.WriteLine("\n\n--- Welcome to Smart Garage (v2.0 - Refactored!) ---");
 
             // שלב 1: הוספת הלקוח החדש (משימה 3)
-            Drone drone1 = new Drone("DJI-Mavic", 30);
 
             // שלב 2: יצירת מערכים פולימורפיים חכמים
             
@@ -60,8 +75,9 @@
             robot1.StartCleaning();
             drone1.Fly();
             */
-		}
-	}
+
+        }
+    }
 
 }
     
